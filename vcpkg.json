@@ -1,0 +1,7 @@
+{
+    "name": "winntdemo",
+    "version-string": "1.0",
+    "dependencies": [
+      "detours"
+    ]
+}

@@ -1,0 +1,28 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: build
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        arch: [Win32, x64]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Configure CMake
+      run: >
+        cmake -B build -S . -A ${{ matrix.arch }}
+        --toolchain $env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake
+        -D CMAKE_INSTALL_PREFIX=package
+    - name: Build
+      run: cmake --build build --target install
+    - uses: actions/upload-artifact@v2
+      with:
+        name: winntbbdemo-${{ matrix.arch }}-b${{ github.run_number }}
+        path: package/**

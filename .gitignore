@@ -1,0 +1,9 @@
+/*/
+!/src
+!/.github
+
+*.o
+*.obj
+*.dll
+*.exe
+*.res
