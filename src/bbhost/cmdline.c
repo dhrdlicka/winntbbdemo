@@ -77,7 +77,6 @@ int cmdline_parse(int argc, char *argv[])
 
         if (!filename) {
             filename = argv[i];
-            printf("got filename: %s\n", filename);
         } else {
             fprintf(stderr, "error: hit unexpected \"%s\"\n", argv[i]);
             return 0;
