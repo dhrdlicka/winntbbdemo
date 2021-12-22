@@ -16,9 +16,9 @@ void cmdline_usage()
 usage: bbhost [options] [path to winntbbu.dll]\n\
 \n\
  --low-bpp\tmisleads winntbb into thinking the color depth is 4bpp\n\
- --no-aa\t\tdisables anti-aliasing\n\
+ --no-aa\tdisables anti-aliasing\n\
  --size WxH\tsets the host window to the specified size\n\
- --sku N\t\tinitializes winntbb with the specified product type (build 2296+)"
+ --sku N\tinitializes winntbb with the specified product type (build 2296+)"
     );
 }
 
