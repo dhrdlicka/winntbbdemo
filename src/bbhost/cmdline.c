@@ -56,7 +56,7 @@ int cmdline_parse(int argc, char *argv[])
             continue;
         }
 
-        if (!_stricmp(argv[i], "-size")) {
+        if (!_stricmp(argv[i], "--size")) {
             if(++i == argc) {
                 fprintf(stderr, "error: expected window size, hit end of command line\n");
                 return 0;
