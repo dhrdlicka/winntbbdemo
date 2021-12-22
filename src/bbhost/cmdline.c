@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "cmdline.h"
+#include "version.h"
 
 int no_antialiasing = 0;
 int low_bpp = 0;
@@ -20,16 +21,28 @@ usage: bbhost [options] [path to winntbb]\n\
  --no-aa\tdisables anti-aliasing\n\
  --size WxH\tsets the host window to the specified size\n\
  --sku N\tinitializes winntbb with the specified product type (build 2296+)\n\
- --ansi\t\twinntbba.dll mode - uses ansi strings instead of unicode\n"
+ --ansi\t\twinntbba.dll mode - uses ansi strings instead of unicode\n\
+ --version\tshow version\n"
     );
+}
+
+void cmdline_version()
+{
+    printf("bbhost version " PROJECT_VERSION " (" BUILD_ARCH ")\n");
 }
 
 int cmdline_parse(int argc, char *argv[])
 {
     for (int i = 1; i < argc; i++)
     {
-        if (!_stricmp(argv[i], "-?")) {
-            return 0;
+        if (!_stricmp(argv[i], "-?") || !_stricmp(argv[i], "--help")) {
+            cmdline_usage();
+            exit(0);
+        }
+
+        if (!_stricmp(argv[i], "--version")) {
+            cmdline_version();
+            exit(0);
         }
 
         if (!_stricmp(argv[i], "--no-aa")) {
