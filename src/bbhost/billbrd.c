@@ -137,9 +137,9 @@ int billbrd_load()
 void billbrd_create()
 {
     if(billbrd_build < 2296)
-        InitBillBoard(hostwin_hwnd, L"");
+        InitBillBoard(hostwin_hwnd, ansi ? (void *) "" : (void *) L"");
     else
-        InitBillBoard(hostwin_hwnd, L"", product_type);
+        InitBillBoard(hostwin_hwnd, ansi ? (void *) "" : (void *) L"", product_type);
 
     if(!IsChild(hostwin_hwnd, (HWND) GetBBMainHwnd()))
         SetParent((HWND) GetBBMainHwnd(), hostwin_hwnd);

@@ -7,6 +7,13 @@
 #include "billbrd.h"
 #include "hooks.h"
 
+#define _LSTR(s) L ## s
+#define LSTR(s) _LSTR(s)
+
+#define PROGRESS_TEXT "This is a progress text set by SetProgressText."
+#define TIME_ESTIMATE "This is a time estimate, which is set by SetTimeEstimate."
+#define INFO_TEXT "This is an info text, which is set by SetInfoText."
+
 int main(int argc, char *argv[])
 {
     SetThemeAppProperties(STAP_ALLOW_NONCLIENT);
@@ -42,13 +49,13 @@ int main(int argc, char *argv[])
         SetStep(3);
 
     if (SetProgressText)
-        SetProgressText(L"This is a progress text set by SetProgressText.");
+        SetProgressText(ansi ? (void *) PROGRESS_TEXT : (void *) LSTR(PROGRESS_TEXT));
 
     if (SetTimeEstimate)
-        SetTimeEstimate(L"This is a time estimate, which is set by SetTimeEstimate.");
+        SetTimeEstimate(ansi ? (void *) TIME_ESTIMATE : (void *) LSTR(TIME_ESTIMATE));
 
     if (SetInfoText)
-        SetInfoText(L"This is an info text, which is set by SetInfoText.");
+        SetInfoText(ansi ? (void *) INFO_TEXT : (void *) LSTR(INFO_TEXT));
 
     if (StartBillBoard)
         StartBillBoard();

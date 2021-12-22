@@ -5,6 +5,7 @@
 
 extern int no_antialiasing;
 extern int low_bpp;
+extern int ansi;
 extern int product_type;
 extern int height;
 extern int width;

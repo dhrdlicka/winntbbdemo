@@ -5,27 +5,27 @@
 
 int no_antialiasing = 0;
 int low_bpp = 0;
+int ansi = 0;
 int product_type = 0;
 int height = 480;
 int width = 640;
-char *filename = "winntbbu.dll";
+char *filename = NULL;
 
 void cmdline_usage()
 {
     printf("\
-usage: bbhost [options] [path to winntbbu.dll]\n\
+usage: bbhost [options] [path to winntbb]\n\
 \n\
  --low-bpp\tmisleads winntbb into thinking the color depth is 4bpp\n\
  --no-aa\tdisables anti-aliasing\n\
  --size WxH\tsets the host window to the specified size\n\
- --sku N\tinitializes winntbb with the specified product type (build 2296+)"
+ --sku N\tinitializes winntbb with the specified product type (build 2296+)\n\
+ --ansi\t\twinntbba.dll mode - uses ansi strings instead of unicode\n"
     );
 }
 
 int cmdline_parse(int argc, char *argv[])
 {
-    int got_filename = 0;
-
     for (int i = 1; i < argc; i++)
     {
         if (!_stricmp(argv[i], "-?")) {
@@ -39,6 +39,11 @@ int cmdline_parse(int argc, char *argv[])
 
         if (!_stricmp(argv[i], "--low-bpp")) {
             low_bpp = 1;
+            continue;
+        }
+
+        if (!_stricmp(argv[i], "--ansi")) {
+            ansi = 1;
             continue;
         }
 
@@ -70,12 +75,17 @@ int cmdline_parse(int argc, char *argv[])
             continue;
         }
 
-        if (!got_filename++) {
+        if (!filename) {
             filename = argv[i];
+            printf("got filename: %s\n", filename);
         } else {
             fprintf(stderr, "error: hit unexpected \"%s\"\n", argv[i]);
             return 0;
         }
+    }
+
+    if (!filename) {
+        filename = ansi ? "winntbba.dll" : "winntbbu.dll";
     }
 
     return 1;
